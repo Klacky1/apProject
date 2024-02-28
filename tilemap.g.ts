@@ -77,7 +77,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency8,sprites.castle.tileGrass2], TileScale.Eight);
             case "level0":
-            case "level5":return tiles.createTilemap(hex`10001000040a0a0a0a0a0a0a0a0a0a0a0a0a0a060b0202020202020c02020202020202090b0202030302020202020203030202090b0202020202020202020203030202090b0202020202020202020202020202090b03020c0202020202030202020c02090b0302020202020202020202020202090b0302020202020202020201020202090b0302020202020202020202020202090b0202020202020202020202020202090b0202030202020202020202030202090b0202020302020202020202030202090b020c020202020303030302020202090b0202020202020202020202020202090b02020202020202020202020202020907080808080808080808080808080805`, img`
+            case "level5":return tiles.createTilemap(hex`10001000040a0a0a0a0a0a0a0a0a0a0a0a0a0a060b0202020202020c02020202020202090b0202030302020202020203030202090b0202020202020202020203030202090b0202020202020202020202020202090b03020c0202020202030202020c02090b0302020202020202020202020202090b0302020202020202020201020202090b0302020202020202020202020202090b0202020202020202020202020202090b0202030202020202020202030202090b0202020302020202020202030202090b020c020202020303030302020202090b0202020202020202020202020202090b02020202020202020202020202020907080808080d08080808080808080805`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . 2 2 . . . . . . 2 2 . . . 
@@ -94,7 +94,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.castle.tileGrass2,sprites.castle.tilePath5,sprites.builtin.forestTiles0,sprites.castle.tilePath1,sprites.castle.tilePath9,sprites.castle.tilePath3,sprites.castle.tilePath7,sprites.castle.tilePath8,sprites.castle.tilePath6,sprites.castle.tilePath2,sprites.castle.tilePath4,sprites.dungeon.collectibleInsignia], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.castle.tileGrass2,sprites.castle.tilePath5,sprites.builtin.forestTiles0,sprites.castle.tilePath1,sprites.castle.tilePath9,sprites.castle.tilePath3,sprites.castle.tilePath7,sprites.castle.tilePath8,sprites.castle.tilePath6,sprites.castle.tilePath2,sprites.castle.tilePath4,sprites.dungeon.collectibleInsignia,sprites.dungeon.chestClosed], TileScale.Sixteen);
         }
         return null;
     })

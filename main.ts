@@ -1,68 +1,208 @@
+namespace SpriteKind {
+    export const attack = SpriteKind.create()
+}
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (characterAnimations.matchesRule(warrior, characterAnimations.rule(Predicate.FacingUp))) {
+        attack = sprites.create(img`
+            . . . . . . 9 9 9 . . . . . . . 
+            . . . . . 9 9 9 9 9 . . . . . . 
+            . . . . 9 9 9 . 9 9 9 . . . . . 
+            . . . 9 9 9 . . . 9 9 9 . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 9 . . . . . . . . 
+            . . . . . . . 9 . . . . . . . . 
+            . . . . . . . 9 . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.attack)
+        attack.setPosition(warrior.x, warrior.y - 10)
+        timer.after(85, function () {
+            sprites.destroy(attack)
+        })
+    } else if (characterAnimations.matchesRule(warrior, characterAnimations.rule(Predicate.FacingRight))) {
+        attack = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . 9 . . . 
+            . . . . . . . . . . . . 9 9 . . 
+            . . . . . . . . . . . . 9 9 9 . 
+            . . . . . . . . . . . . . 9 9 9 
+            . . . . . . 9 9 9 . . . . . 9 9 
+            . . . . . . . . . . . . . 9 9 9 
+            . . . . . . . . . . . . 9 9 9 . 
+            . . . . . . . . . . . . 9 9 . . 
+            . . . . . . . . . . . . 9 . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.attack)
+        attack.setPosition(warrior.x + 10, warrior.y)
+        timer.after(85, function () {
+            sprites.destroy(attack)
+        })
+    } else {
+        if (characterAnimations.matchesRule(warrior, characterAnimations.rule(Predicate.FacingLeft))) {
+            attack = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . 9 . . . . . . . . . . . . 
+                . . 9 9 . . . . . . . . . . . . 
+                . 9 9 9 . . . . . . . . . . . . 
+                9 9 9 . . . . . . . . . . . . . 
+                9 9 . . . . . . . . . . . . . . 
+                9 9 9 . . . 9 9 9 . . . . . . . 
+                . 9 9 9 . . . . . . . . . . . . 
+                . . 9 9 . . . . . . . . . . . . 
+                . . . 9 . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.attack)
+            attack.setPosition(warrior.x - 10, warrior.y)
+            timer.after(85, function () {
+                sprites.destroy(attack)
+            })
+        } else if (characterAnimations.matchesRule(warrior, characterAnimations.rule(Predicate.FacingDown))) {
+            attack = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . 9 . . . . . . . . 
+                . . . . . . . 9 . . . . . . . . 
+                . . . . . . . 9 . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . 9 9 9 . . . 9 9 9 . . . . 
+                . . . . 9 9 9 . 9 9 9 . . . . . 
+                . . . . . 9 9 9 9 9 . . . . . . 
+                . . . . . . 9 9 9 . . . . . . . 
+                `, SpriteKind.attack)
+            attack.setPosition(warrior.x, warrior.y + 10)
+            timer.after(85, function () {
+                sprites.destroy(attack)
+            })
+        }
+    }
+})
+sprites.onOverlap(SpriteKind.Food, SpriteKind.Player, function (sprite, otherSprite) {
+    statusbar.value += 200
+    sprites.destroy(medkit)
+})
+sprites.onOverlap(SpriteKind.attack, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(zombies, effects.rings, 500)
+    statusbar2.value += -25
+    pause(100)
+    sprites.destroy(otherSprite)
+})
+function healUp (col: number, row: number) {
+    medkit = sprites.create(img`
+        . . . . . . . e c 7 . . . . . . 
+        . . . . e e e c 7 7 e e . . . . 
+        . . c e e e e c 7 e 2 2 e e . . 
+        . c e e e e e c 6 e e 2 2 2 e . 
+        . c e e e 2 e c c 2 4 5 4 2 e . 
+        c e e e 2 2 2 2 2 2 4 5 5 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 4 4 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 2 2 e 
+        c e e 2 2 2 2 2 2 2 2 2 2 4 2 e 
+        . e e e 2 2 2 2 2 2 2 2 2 4 e . 
+        . 2 e e 2 2 2 2 2 2 2 2 4 2 e . 
+        . . 2 e e 2 2 2 2 2 4 4 2 e . . 
+        . . . 2 2 e e 4 4 4 2 e e . . . 
+        . . . . . 2 2 e e e e . . . . . 
+        `, SpriteKind.Food)
+    tiles.placeOnRandomTile(medkit, sprites.castle.tileGrass2)
+}
 function spawnZ () {
     spawnZombies = tiles.getTilesByType(sprites.dungeon.collectibleInsignia)
     enmieList = [img`
-        . . . . . . f f f . . . . . . . 
-        . . . . . f b b b f . . . . . . 
-        . . . . f b b 2 b b f . . . . . 
-        . . . f b b 2 2 2 b b f . . . . 
-        . . . f b 2 2 2 2 2 b f . . . . 
-        . . . . f b 2 2 2 b f . . . . . 
-        . . . . . f b b b f . . . . . . 
-        . . . . . . f b f . . . . . . . 
-        . . . . f f b b b f f . . . . . 
-        . . . f b b f b f b b f . . . . 
-        . . . . f f f b f f f . . . . . 
-        . . . . . . f b f . . . . . . . 
-        . . . . . f b b b f . . . . . . 
-        . . . . f b f f f b f . . . . . 
-        . . . f b f . . . f b f . . . . 
-        . . . f b f . . . f b f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 2 . . . . . . . . 
+        . . . . . . 2 . 2 . . . . . . . 
+        . . . . . 2 . 2 . 2 . . . . . . 
+        . . . . . 2 . . . 2 . . . . . . 
+        . . . . . 2 2 . 2 2 . . . . . . 
+        . . . . 2 . 2 2 2 . 2 . . . . . 
+        . . . 2 . 2 . 2 . 2 . 2 . . . . 
+        . . . 2 . . . 2 . . . 2 . . . . 
+        . . . . 2 . 2 2 2 . 2 . . . . . 
+        . . . . . 2 2 . 2 2 . . . . . . 
+        . . . . . 2 . 2 . 2 . . . . . . 
+        . . . . . 2 . . . 2 . . . . . . 
+        . . . . . . 2 . 2 . . . . . . . 
+        . . . . . . . 2 . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `, img`
-        . . . . . . f f f . . . . . . . 
-        . . . . . f 4 4 4 f . . . . . . 
-        . . . . f 4 4 2 4 4 f . . . . . 
-        . . . f 4 4 2 2 2 4 4 f . . . . 
-        . . . f 4 2 2 2 2 2 4 f . . . . 
-        . . . . f 4 2 2 2 4 f . . . . . 
-        . . . . . f 4 4 4 f . . . . . . 
-        . . . . . . f 4 f . . . . . . . 
-        . . . . f f 4 4 4 f f . . . . . 
-        . . . f 4 4 f 4 f 4 4 f . . . . 
-        . . . . f f f 4 f f f . . . . . 
-        . . . . . . f 4 f . . . . . . . 
-        . . . . . f 4 4 4 f . . . . . . 
-        . . . . f 4 f f f 4 f . . . . . 
-        . . . f 4 f . . . f 4 f . . . . 
-        . . . f 4 f . . . f 4 f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 8 8 . . . . . . . 
+        . . . . . . 8 . . 8 . . . . . . 
+        . . . 8 8 8 . . 8 . 8 8 8 . . . 
+        . . 8 . . 8 8 . . 8 8 . . 8 . . 
+        . 8 . . 8 . 8 8 8 8 . . 8 . 8 . 
+        . . 8 . . 8 8 . . 8 8 . . 8 . . 
+        . . . 8 8 8 . . 8 . 8 8 8 . . . 
+        . . . . . . 8 . . 8 . . . . . . 
+        . . . . . . . 8 8 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `, img`
-        . . . . . . f f f . . . . . . . 
-        . . . . . f 2 2 2 f . . . . . . 
-        . . . . f 2 2 9 2 2 f . . . . . 
-        . . . f 2 2 9 9 9 2 2 f . . . . 
-        . . . f 2 9 9 9 9 9 2 f . . . . 
-        . . . . f 2 9 9 9 2 f . . . . . 
-        . . . . . f 2 2 2 f . . . . . . 
-        . . . . . . f 2 f . . . . . . . 
-        . . . . f f 2 2 2 f f . . . . . 
-        . . . f 2 2 f 2 f 2 2 f . . . . 
-        . . . . f f f 2 f f f . . . . . 
-        . . . . . . f 2 f . . . . . . . 
-        . . . . . f 2 2 2 f . . . . . . 
-        . . . . f 2 f f f 2 f . . . . . 
-        . . . f 2 f . . . f 2 f . . . . 
-        . . . f 2 f . . . f 2 f . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . 4 4 . . . . 4 4 . . . . 
+        . . . . . . 4 . . 4 . . . . . . 
+        . . . . . 4 4 4 4 4 4 . . . . . 
+        . . . . . . . 4 4 . . . . . . . 
+        . . . . . 4 4 . . 4 4 . . . . . 
+        . . . . 4 . 4 . . 4 . 4 . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `]
     zombies = sprites.create(enmieList._pickRandom(), SpriteKind.Enemy)
+    statusbar2 = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
+    statusbar2.max = 50
+    statusbar2.attachToSprite(zombies)
     tiles.placeOnRandomTile(zombies, sprites.dungeon.collectibleInsignia)
-    zombies.follow(warrior, 40)
+    zombies.follow(warrior, 20)
+}
+function levelS () {
+	
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     statusbar.value += -25
-    pause(500)
+    pause(1000)
 })
-let zombies: Sprite = null
 let enmieList: Image[] = []
 let spawnZombies: tiles.Location[] = []
+let statusbar2: StatusBarSprite = null
+let zombies: Sprite = null
+let medkit: Sprite = null
+let attack: Sprite = null
 let statusbar: StatusBarSprite = null
 let warrior: Sprite = null
 tiles.loadMap(tiles.createMap(tilemap`level0`))
@@ -70,12 +210,12 @@ warrior = sprites.create(img`
     . . . . . . f f f . . . . . . . 
     . . . . . 2 2 2 2 2 . . . . . . 
     . . . . f b b b b b f . . . . . 
-    . . . f b b 9 b 9 b b f . . . . 
-    . . . f b b b b b b b f . . . . 
-    . . . . f b b b b b f . . . 9 9 
-    . . . . . f b b b f . . . 9 9 9 
-    . . . . . . f b f . . . 9 9 9 . 
-    . . . . f f b b b f f e e 9 . . 
+    . . . f b d d b d d b f . . . . 
+    . . . f b b d b d b b f . . . . 
+    . . . . f b b b b b f . . . 5 5 
+    . . . . . f b d b f . . . 5 5 5 
+    . . . . . . f b f . . . 5 5 5 . 
+    . . . . f f b b b f f e e 5 . . 
     . . . f b b f b f b b f e . . . 
     . . . . f f f b f f f . . . . . 
     . . . . . . f b f . . . . . . . 
@@ -92,6 +232,8 @@ statusbar.max = 300
 statusbar.value = 300
 statusbar.positionDirection(CollisionDirection.Top)
 statusbar.setColor(7, 2)
+statusbar.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 for (let index = 0; index < 10; index++) {
     spawnZ()
 }
+healUp(1, 1)
