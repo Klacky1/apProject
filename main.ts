@@ -251,15 +251,6 @@ function spawnZ () {
     tiles.placeOnRandomTile(zombies, sprites.dungeon.collectibleInsignia)
     zombies.follow(warrior, 20)
 }
-function levelS () {
-    if (level == 0) {
-        tiles.loadMap(tiles.createMap(tilemap`level0`))
-        tiles.placeOnTile(warrior, tiles.getTileLocation(7, 7))
-    } else if (level == 1) {
-        tiles.loadMap(tiles.createMap(tilemap`level6`))
-        tiles.placeOnRandomTile(warrior, sprites.dungeon.darkGroundCenter)
-    }
-}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     statusbar.value += -25
     pause(1000)
@@ -273,8 +264,8 @@ let attack: Sprite = null
 let list2: Image[] = []
 let statusbar: StatusBarSprite = null
 let warrior: Sprite = null
-let level = 0
-level = 0
+tiles.loadMap(tiles.createMap(tilemap`level0`))
+tiles.placeOnTile(warrior, tiles.getTileLocation(7, 7))
 warrior = sprites.create(img`
     . . . . . . f f f . . . . . . . 
     . . . . . 2 2 2 2 2 . . . . . . 
