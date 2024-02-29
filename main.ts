@@ -1,6 +1,62 @@
 namespace SpriteKind {
     export const attack = SpriteKind.create()
 }
+function spawnWaves (num: number, velocity: number) {
+    for (let index = 0; index < num; index++) {
+        list2 = [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . 5 5 5 . . . . . . . 
+            . . . . 5 5 5 f 5 5 5 . . . . . 
+            . . 5 5 5 5 f f f 5 5 5 5 . . . 
+            . . . . 5 5 5 f 5 5 5 . . . . . 
+            . . . . . . 5 5 5 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . 8 . . . . . . . 
+            . . . . . . . . 8 . . . . . . . 
+            . . . . . . . 8 8 8 . . . . . . 
+            . . . . . . . 8 8 8 . . . . . . 
+            . . . . . . 8 8 5 8 8 . . . . . 
+            . . . . . . 8 5 5 5 8 . . . . . 
+            . . . . . . 8 8 5 8 8 . . . . . 
+            . . . . . . . 8 8 8 . . . . . . 
+            . . . . . . . 8 8 8 . . . . . . 
+            . . . . . . . . 8 . . . . . . . 
+            . . . . . . . . 8 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . 2 . 2 . . . . . . . 
+            . . . . . 2 2 2 2 2 . . . . . . 
+            . . . . 2 2 f 2 f 2 2 . . . . . 
+            . . . 2 2 2 2 2 2 2 2 2 . . . . 
+            . . . . 2 2 f f f 2 2 . . . . . 
+            . . . . . 2 2 f 2 2 . . . . . . 
+            . . . . . . 2 2 2 . . . . . . . 
+            . . . . . . . 2 . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `]
+    }
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (characterAnimations.matchesRule(warrior, characterAnimations.rule(Predicate.FacingUp))) {
         attack = sprites.create(img`
@@ -102,6 +158,11 @@ sprites.onOverlap(SpriteKind.Food, SpriteKind.Player, function (sprite, otherSpr
     statusbar.value += 200
     sprites.destroy(medkit)
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
+    if (0 == 0) {
+    	
+    }
+})
 sprites.onOverlap(SpriteKind.attack, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(zombies, effects.rings, 500)
     statusbar2.value += -25
@@ -191,7 +252,13 @@ function spawnZ () {
     zombies.follow(warrior, 20)
 }
 function levelS () {
-	
+    if (level == 0) {
+        tiles.loadMap(tiles.createMap(tilemap`level0`))
+        tiles.placeOnTile(warrior, tiles.getTileLocation(7, 7))
+    } else if (level == 1) {
+        tiles.loadMap(tiles.createMap(tilemap`level6`))
+        tiles.placeOnRandomTile(warrior, sprites.dungeon.darkGroundCenter)
+    }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     statusbar.value += -25
@@ -203,9 +270,11 @@ let statusbar2: StatusBarSprite = null
 let zombies: Sprite = null
 let medkit: Sprite = null
 let attack: Sprite = null
+let list2: Image[] = []
 let statusbar: StatusBarSprite = null
 let warrior: Sprite = null
-tiles.loadMap(tiles.createMap(tilemap`level0`))
+let level = 0
+level = 0
 warrior = sprites.create(img`
     . . . . . . f f f . . . . . . . 
     . . . . . 2 2 2 2 2 . . . . . . 
@@ -224,7 +293,6 @@ warrior = sprites.create(img`
     . . . f b f . . . f b f . . . . 
     . . . f b f . . . f b f . . . . 
     `, SpriteKind.Player)
-tiles.placeOnTile(warrior, tiles.getTileLocation(7, 7))
 scene.cameraFollowSprite(warrior)
 controller.moveSprite(warrior, 75, 75)
 statusbar = statusbars.create(100, 5, StatusBarKind.Health)
@@ -232,7 +300,6 @@ statusbar.max = 300
 statusbar.value = 300
 statusbar.positionDirection(CollisionDirection.Top)
 statusbar.setColor(7, 2)
-statusbar.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 for (let index = 0; index < 10; index++) {
     spawnZ()
 }
