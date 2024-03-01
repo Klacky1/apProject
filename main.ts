@@ -1,62 +1,6 @@
 namespace SpriteKind {
     export const attack = SpriteKind.create()
 }
-function spawnWaves (num: number, velocity: number) {
-    for (let index = 0; index < num; index++) {
-        list2 = [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . 5 5 5 . . . . . . . 
-            . . . . 5 5 5 f 5 5 5 . . . . . 
-            . . 5 5 5 5 f f f 5 5 5 5 . . . 
-            . . . . 5 5 5 f 5 5 5 . . . . . 
-            . . . . . . 5 5 5 . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . 8 . . . . . . . 
-            . . . . . . . . 8 . . . . . . . 
-            . . . . . . . 8 8 8 . . . . . . 
-            . . . . . . . 8 8 8 . . . . . . 
-            . . . . . . 8 8 5 8 8 . . . . . 
-            . . . . . . 8 5 5 5 8 . . . . . 
-            . . . . . . 8 8 5 8 8 . . . . . 
-            . . . . . . . 8 8 8 . . . . . . 
-            . . . . . . . 8 8 8 . . . . . . 
-            . . . . . . . . 8 . . . . . . . 
-            . . . . . . . . 8 . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . 2 . 2 . . . . . . . 
-            . . . . . 2 2 2 2 2 . . . . . . 
-            . . . . 2 2 f 2 f 2 2 . . . . . 
-            . . . 2 2 2 2 2 2 2 2 2 . . . . 
-            . . . . 2 2 f f f 2 2 . . . . . 
-            . . . . . 2 2 f 2 2 . . . . . . 
-            . . . . . . 2 2 2 . . . . . . . 
-            . . . . . . . 2 . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `]
-    }
-}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (characterAnimations.matchesRule(warrior, characterAnimations.rule(Predicate.FacingUp))) {
         attack = sprites.create(img`
@@ -159,15 +103,19 @@ sprites.onOverlap(SpriteKind.Food, SpriteKind.Player, function (sprite, otherSpr
     sprites.destroy(medkit)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
-    if (0 == 0) {
-    	
-    }
+    statusbar.value += 200
+})
+statusbars.onZero(StatusBarKind.Health, function (status) {
+    warriorDown += -1
+    game.gameOver(true)
 })
 sprites.onOverlap(SpriteKind.attack, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(zombies, effects.rings, 500)
     statusbar2.value += -25
     pause(100)
     sprites.destroy(otherSprite)
+    info.changeScoreBy(-1)
+    CEnemies += -1
 })
 function healUp (col: number, row: number) {
     medkit = sprites.create(img`
@@ -190,78 +138,85 @@ function healUp (col: number, row: number) {
         `, SpriteKind.Food)
     tiles.placeOnRandomTile(medkit, sprites.castle.tileGrass2)
 }
-function spawnZ () {
-    spawnZombies = tiles.getTilesByType(sprites.dungeon.collectibleInsignia)
-    enmieList = [img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . 2 . . . . . . . . 
-        . . . . . . 2 . 2 . . . . . . . 
-        . . . . . 2 . 2 . 2 . . . . . . 
-        . . . . . 2 . . . 2 . . . . . . 
-        . . . . . 2 2 . 2 2 . . . . . . 
-        . . . . 2 . 2 2 2 . 2 . . . . . 
-        . . . 2 . 2 . 2 . 2 . 2 . . . . 
-        . . . 2 . . . 2 . . . 2 . . . . 
-        . . . . 2 . 2 2 2 . 2 . . . . . 
-        . . . . . 2 2 . 2 2 . . . . . . 
-        . . . . . 2 . 2 . 2 . . . . . . 
-        . . . . . 2 . . . 2 . . . . . . 
-        . . . . . . 2 . 2 . . . . . . . 
-        . . . . . . . 2 . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . 8 8 . . . . . . . 
-        . . . . . . 8 . . 8 . . . . . . 
-        . . . 8 8 8 . . 8 . 8 8 8 . . . 
-        . . 8 . . 8 8 . . 8 8 . . 8 . . 
-        . 8 . . 8 . 8 8 8 8 . . 8 . 8 . 
-        . . 8 . . 8 8 . . 8 8 . . 8 . . 
-        . . . 8 8 8 . . 8 . 8 8 8 . . . 
-        . . . . . . 8 . . 8 . . . . . . 
-        . . . . . . . 8 8 . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . 4 4 . . . . 4 4 . . . . 
-        . . . . . . 4 . . 4 . . . . . . 
-        . . . . . 4 4 4 4 4 4 . . . . . 
-        . . . . . . . 4 4 . . . . . . . 
-        . . . . . 4 4 . . 4 4 . . . . . 
-        . . . . 4 . 4 . . 4 . 4 . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `]
-    zombies = sprites.create(enmieList._pickRandom(), SpriteKind.Enemy)
-    statusbar2 = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
-    statusbar2.max = 50
-    statusbar2.attachToSprite(zombies)
-    tiles.placeOnRandomTile(zombies, sprites.dungeon.collectibleInsignia)
-    zombies.follow(warrior, 20)
+function spawnZ (num: number) {
+    for (let index = 0; index < num; index++) {
+        spawnZombies = tiles.getTilesByType(sprites.dungeon.collectibleInsignia)
+        enmieList = [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 2 . . . . . . . . 
+            . . . . . . 2 . 2 . . . . . . . 
+            . . . . . 2 . 2 . 2 . . . . . . 
+            . . . . . 2 . . . 2 . . . . . . 
+            . . . . . 2 2 . 2 2 . . . . . . 
+            . . . . 2 . 2 2 2 . 2 . . . . . 
+            . . . 2 . 2 . 2 . 2 . 2 . . . . 
+            . . . 2 . . . 2 . . . 2 . . . . 
+            . . . . 2 . 2 2 2 . 2 . . . . . 
+            . . . . . 2 2 . 2 2 . . . . . . 
+            . . . . . 2 . 2 . 2 . . . . . . 
+            . . . . . 2 . . . 2 . . . . . . 
+            . . . . . . 2 . 2 . . . . . . . 
+            . . . . . . . 2 . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 8 8 . . . . . . . 
+            . . . . . . 8 . . 8 . . . . . . 
+            . . . 8 8 8 . . 8 . 8 8 8 . . . 
+            . . 8 . . 8 8 . . 8 8 . . 8 . . 
+            . 8 . . 8 . 8 8 8 8 . . 8 . 8 . 
+            . . 8 . . 8 8 . . 8 8 . . 8 . . 
+            . . . 8 8 8 . . 8 . 8 8 8 . . . 
+            . . . . . . 8 . . 8 . . . . . . 
+            . . . . . . . 8 8 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . 4 4 . . . . 4 4 . . . . 
+            . . . . . . 4 . . 4 . . . . . . 
+            . . . . . 4 4 4 4 4 4 . . . . . 
+            . . . . . . . 4 4 . . . . . . . 
+            . . . . . 4 4 . . 4 4 . . . . . 
+            . . . . 4 . 4 . . 4 . 4 . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `]
+        zombies = sprites.create(enmieList._pickRandom(), SpriteKind.Enemy)
+        statusbar2 = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
+        statusbar2.max = 50
+        statusbar2.attachToSprite(zombies)
+        tiles.placeOnRandomTile(zombies, sprites.dungeon.collectibleInsignia)
+        zombies.follow(warrior, 20)
+        if (warriorDown != 0) {
+            game.setGameOverScoringType(game.ScoringType.HighScore)
+        }
+    }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     statusbar.value += -25
     pause(1000)
 })
+let level = 0
 let enmieList: Image[] = []
 let spawnZombies: tiles.Location[] = []
+let CEnemies = 0
 let statusbar2: StatusBarSprite = null
 let zombies: Sprite = null
 let medkit: Sprite = null
 let attack: Sprite = null
-let list2: Image[] = []
+let warriorDown = 0
 let statusbar: StatusBarSprite = null
 let warrior: Sprite = null
 tiles.loadMap(tiles.createMap(tilemap`level0`))
@@ -291,7 +246,15 @@ statusbar.max = 300
 statusbar.value = 300
 statusbar.positionDirection(CollisionDirection.Top)
 statusbar.setColor(7, 2)
-for (let index = 0; index < 10; index++) {
-    spawnZ()
-}
+let numZ = 10
 healUp(1, 1)
+warriorDown = 0
+forever(function () {
+    if (CEnemies == 0) {
+        info.setScore(numZ)
+        level = 0
+        CEnemies = numZ
+        numZ += 2
+        spawnZ(numZ)
+    }
+})
