@@ -77,10 +77,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
+                . . . . . . . 9 . . . . . . . . 
+                . . . . . . . 9 . . . . . . . . 
+                . . . . . . . 9 . . . . . . . . 
+                . . . . . . . 9 . . . . . . . . 
                 . . . . . . . 9 . . . . . . . . 
                 . . . . . . . 9 . . . . . . . . 
                 . . . . . . . 9 . . . . . . . . 
@@ -112,7 +112,6 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
 sprites.onOverlap(SpriteKind.attack, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(zombies, effects.rings, 500)
     statusbar2.value += -25
-    pause(100)
     sprites.destroy(otherSprite)
     info.changeScoreBy(-1)
     CEnemies += -1
@@ -194,11 +193,11 @@ function spawnZ (num: number) {
             . . . . . . . . . . . . . . . . 
             `]
         zombies = sprites.create(enmieList._pickRandom(), SpriteKind.Enemy)
+        tiles.placeOnRandomTile(zombies, sprites.dungeon.collectibleInsignia)
+        zombies.follow(warrior, 20)
         statusbar2 = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
         statusbar2.max = 50
         statusbar2.attachToSprite(zombies)
-        tiles.placeOnRandomTile(zombies, sprites.dungeon.collectibleInsignia)
-        zombies.follow(warrior, 20)
         if (warriorDown != 0) {
             game.setGameOverScoringType(game.ScoringType.HighScore)
         }

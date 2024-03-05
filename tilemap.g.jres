@@ -56,31 +56,6 @@
         ],
         "displayName": "level4"
     },
-    "level5": {
-        "id": "level5",
-        "mimeType": "application/mkcd-tilemap",
-        "data": "MTAxMDAwMTAwMDA0MGEwYTBhMGEwYTBhMGEwYTBhMGEwYTBhMGEwYTA2MGIwMjAyMDIwMjAyMDIwYzBjMDIwMjAyMDIwMjAyMDkwYjAyMDIwMzAzMDIwMjAyMDIwMjAyMDMwMzAyMDIwOTBiMDIwMjAyMDIwMjAyMDIwMjAyMDIwMzAzMDIwMjA5MGIwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMDkwYjAzMDIwYzAyMDIwMjAyMDIwMzAyMDIwMjBjMDIwOTBiMDMwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMGMwMjA5MGIwMzAyMDIwMjAyMDIwMjAyMDIwMjAxMDIwMjAyMDkwYjAzMDIwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMDIwOTBiMDIwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMDIwMjA5MGIwMjAyMDMwMjBlMDIwMjAyMDIwMjAyMDMwMjAyMDkwYjAyMDIwMjAyMGYwMjAyMDIwMjAyMGMwMzAyMDIwOTBiMDIwYzAyMDIwZTBmMDMwMzAzMDMwMjAyMDIwMjA5MGIwMjAyMDIwZjBmMGUwMjAyMDIwMjAyMDIwMjAyMDkwYjAyMDIwMjBlMTAwZjAyMDIwMjAyMDIwMjAyMDIwOTA3MDgwODA4MTAwZDEwMDgwODA4MDgwODA4MDgwODA1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDIwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDIwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMjAyMjAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
-        "tileset": [
-            "myTiles.transparency16",
-            "sprites.castle.tileGrass2",
-            "sprites.castle.tilePath5",
-            "sprites.builtin.forestTiles0",
-            "sprites.castle.tilePath1",
-            "sprites.castle.tilePath9",
-            "sprites.castle.tilePath3",
-            "sprites.castle.tilePath7",
-            "sprites.castle.tilePath8",
-            "sprites.castle.tilePath6",
-            "sprites.castle.tilePath2",
-            "sprites.castle.tilePath4",
-            "sprites.dungeon.collectibleInsignia",
-            "sprites.dungeon.chestClosed",
-            "sprites.dungeon.floorLight1",
-            "sprites.dungeon.floorLight0",
-            "sprites.dungeon.doorLockedSouth"
-        ],
-        "displayName": "level0"
-    },
     "level6": {
         "id": "level6",
         "mimeType": "application/mkcd-tilemap",
@@ -164,6 +139,30 @@
             "sprites.builtin.forestTiles15"
         ],
         "displayName": "level11"
+    },
+    "level5": {
+        "id": "level5",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAxMDAwMTAwMDA3MDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA3MDcwYzBjMGMwYzBjMGMwMzAzMGMwYzBjMGMwYzBjMDcwNzBjMGMwZjBmMGMwYzBjMGMwYzBjMDkwODBjMGMwNzA3MGMwYzBjMGMwYzBjMGMwYzBjMGMwYTBiMGMwYzA3MDcwYzBjMGMwYzBjMGMwYzBjMGMwYzBjMGMwYzBjMDcwNzBmMGMwMzBjMGMwYzBjMGMwZjBjMGMwYzAzMGMwNzA3MGYwYzBjMGMwYzBjMGMwYzBjMGMwYzBjMDMwYzA3MDcwZjBjMGYwYzBjMGMwYzBjMGMwYzAxMGMwYzBjMDcwNzBmMGMwYzBmMGMwYzBjMGMwYzBjMGMwYzBjMGMwNzA3MGMwYzBjMGMwYzBjMGMwYzBjMGMwYzBjMGMwYzA3MDcwYzBjMGYwYzA1MGMwYzBjMGMwYzBjMGYwYzBjMDcwNzBjMGMwYzBlMDUwZDBjMGMwYzBjMDMwZjBjMGMwNzA3MGMwMzBjMGQwNTA1MGMwZjBmMGYwYzBjMGMwYzA3MDcwYzBjMGMwNTBkMDUwYzBjMGMwYzBjMGMwYzBjMDcwNzBjMGMwYzA1MDYwYzBjMGMwYzBjMGMwYzBjMGMwNzA3MDcwNzA3MDYwNDA2MDcwNzA3MDcwNzA3MDcwNzAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIwMDIwMDAwMjAwMjAwMDAwMDAwMDAwMDIwMDIwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDIwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDIwMjAwMDAwMDAwMDAwMDAyMDAwMDIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAyMjAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.castle.tileGrass2",
+            "sprites.castle.tilePath9",
+            "sprites.dungeon.collectibleInsignia",
+            "sprites.dungeon.chestClosed",
+            "sprites.dungeon.floorLight1",
+            "sprites.dungeon.doorLockedSouth",
+            "sprites.dungeon.floorLightMoss",
+            "sprites.dungeon.purpleInnerNorthEast",
+            "sprites.dungeon.purpleInnerNorthWest",
+            "sprites.dungeon.purpleInnerSouthWest",
+            "sprites.dungeon.purpleInnerSouthEast",
+            "sprites.dungeon.darkGroundCenter",
+            "sprites.dungeon.floorLight0",
+            "sprites.dungeon.darkGroundSouthWest1",
+            "sprites.dungeon.floorDark0"
+        ],
+        "displayName": "level0"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
